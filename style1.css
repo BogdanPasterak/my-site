@@ -1,6 +1,6 @@
-#myClock1 {
+.myClock {
   width: 350px;
-  height: 40px;
+  height: 39px;
   background-color: yellow;
   text-align: center;
   vertical-align: middle;

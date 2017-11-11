@@ -19,8 +19,8 @@ function countSecounds()
   if (hours<10) hours = "0"+hours;
   if (minutes<10) minutes = "0"+minutes;
   if (seconds<10) seconds = "0"+seconds;
-  target.innerHTML = '<h1>' + apm + ' - ' + hours + ' : ' + minutes
-      + ' : ' + seconds + '</h1>';
+  target.innerHTML = '<h1>' + apm + '-' + hours + ':' + minutes
+      + ':' + seconds + '</h1>';
 
    setTimeout("countSecounds()",1000);
 }
@@ -28,20 +28,36 @@ function bildTable()
 {
   var tar2 = document.getElementById('myClock2');
   var tb = document.createElement("table");
-  //tb.setAttribute("border","0");
   tb.setAttribute("width","100%");
-  var bo = document.createElement("tbody");
+  //var h = (( tar2.height - 10 ) / 4).toFixed(0);
+  var h = 7;
+  console.log(h);
+  //alert(h);
   for (var r = 0; r < 4; r++) {
     var row = document.createElement("tr");
-    row.setAttribute("height","7px");
+    row.setAttribute("height", h + "px");
     for (var c = 0; c < 8; c++) {
       var cell = document.createElement("td");
-      cell.style.setProperty("background-color","gray");
+      if ( c==0 || c==2 || c==5) {
+        cell.setAttribute("width", (7-(c>0)*3) + "%");
+        if ( r==0 || r==2 ){
+          cell.style.setProperty("background-color","gray");
+          if ( c==0 & r==0 ){
+            cell.setAttribute("rowspan","4");
+            row.appendChild(cell);
+          } else if ( c==2 || c==5 ){
+            cell.setAttribute("rowspan","2");
+            row.appendChild(cell);
+          }
+        }
+      } else {
+        cell.setAttribute("width","17%");
+        cell.style.setProperty("background-color","gray");
+        row.appendChild(cell);
+      }
 
-      row.appendChild(cell);
     }
-    bo.appendChild(row);
+    tb.appendChild(row);
   }
-  tb.appendChild(bo);
   tar2.appendChild(tb);
 }
